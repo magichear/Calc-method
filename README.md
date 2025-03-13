@@ -72,3 +72,30 @@ $$
 e_r(x \cdot y) \approx e_r(x) + e_r(y) $$
 $$ e_r\left(\frac{x}{y}\right) \approx e_r(x) - e_r(y) 
 $$
+
+### Lab2
+
+这一次的原理比较简单，而且没有明确要求精度。
+
+`n`阶拉格朗日插值，分别计算定长节点、切比雪夫节点与原函数在多个测试点处的近似最大模误差
+
+允许自定义并传入插值节点生成方法指针与原始函数指针
+
+在计算基函数时，分母自然是每项都算一遍；对于分子，如果每一项都重新全部乘一遍就太浪费了，可以先正反各遍历一遍求出前缀积与后缀积，这样在计算某项时只需要将**前缀积与后缀积**的对应位置乘起来就是这一项的分子，分母从预先计算好的向量里取出对应位置
+
+
+`n`阶插值需要`n+1`个节点
+
+```sh
+Equidist
+Node count = 6, Max mod Error = 4.326923076923077e-01
+Node count = 11, Max mod Error = 1.915643050219250e+00
+Node count = 21, Max mod Error = 5.976568477453189e+01
+Node count = 41, Max mod Error = 1.039408117698964e+05
+
+Chebyshev
+Node count = 6, Max mod Error = 5.559113388123955e-01
+Node count = 11, Max mod Error = 1.091467246497665e-01
+Node count = 21, Max mod Error = 1.532508854382740e-02
+Node count = 41, Max mod Error = 2.889123107673062e-04
+```
