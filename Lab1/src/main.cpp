@@ -1,7 +1,8 @@
 #include <cmath>
-#include <thread>
+#include <thread>   // pthread ---> C的库，更底层更复杂，需要手动处理错误
 #include <vector>
-#include <mutex>
+#include <mutex> // 互斥锁
+//#include <shared_mutex> // 读写锁 C++17  读：shared_lock  写：unique_lock
 #include <condition_variable>
 #include "Series.hpp"
 

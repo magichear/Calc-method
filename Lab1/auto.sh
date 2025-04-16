@@ -4,4 +4,4 @@ cd build
 
 cmake ..
 make
-./LAB1
+./xxxxx
