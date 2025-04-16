@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 #include <cmath>
-
+#include <climits>
 #ifdef USE_DOUBLE
 using   Value =   double;
 #define POW(x, y) pow(x, y)

@@ -5,15 +5,10 @@
 #include <vector>
 
 class GaussSeidelSolver : public Solver {
-private:
-    int iterations;
-
 public:
-    GaussSeidelSolver(std::vector<std::vector<Value>> matrix, std::vector<Value> rhs, Value eps = 1e-7, int max_iter = 1000);
+    GaussSeidelSolver(const std::vector<std::vector<Value>> A,const std::vector<Value> b, Value eps = 1e-7, int maxSteps = 10000);
 
     void solve() override;
-
-    int getIterations() const;
 };
 
 #endif

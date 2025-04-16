@@ -4,17 +4,17 @@
 #include "Solver.hh"
 #include <vector>
 
+/**
+ * @brief 逐次超松弛迭代
+ */
 class SORSolver : public Solver {
 private:
     Value omega;
-    int iterations;
 
 public:
-    SORSolver(std::vector<std::vector<Value>> matrix, std::vector<Value> rhs, Value w, Value eps = 1e-7, int max_iter = 1000);
+    SORSolver(const std::vector<std::vector<Value>> A,const std::vector<Value> b, Value omega, Value eps = 1e-7, int maxSteps = 100000);
 
     void solve() override;
-
-    int getIterations() const;
 };
 
 #endif

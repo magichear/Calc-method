@@ -2,30 +2,23 @@
 #include <cmath>
 #include <algorithm>
 
-GaussSeidelSolver::GaussSeidelSolver(std::vector<std::vector<Value>> matrix, std::vector<Value> rhs, Value eps, int max_iter)
-    : Solver(matrix, rhs, eps, max_iter), iterations(0) {}
+GaussSeidelSolver::GaussSeidelSolver(std::vector<std::vector<Value>> A, std::vector<Value> b, Value eps, int maxSteps)
+    : Solver(A, b, eps, maxSteps){}
 
 void GaussSeidelSolver::solve() {
+    Value InfNorm = 1.0;    // 无穷范数，在迭代过程中逐渐计算出来
     int n = A.size();
-    std::vector<Value> x_old = x;
-    iterations = 0;
+    steps = 0;    
+    Value pre;
 
-    while (iterations < max_iterations) {
-        x_old = x;
-        Value max_diff = 0.0;
-
+    while (InfNorm > epsilon && ++steps < max_steps) {
+        InfNorm = 0.0;
         for (int i = 0; i < n; ++i) {
-            Value sigma = 0.0;
-            for (int j = 0; j < n; ++j) {
-                if (j != i) sigma += A[i][j] * x[j];
-            }
-            x[i] = (b[i] - sigma) / A[i][i];
-            max_diff = std::max(max_diff, std::abs(x[i] - x_old[i]));
+            Value s = 0.0;
+            pre = x[i];
+            for (int j = 0; j < n; ++j) { s += A[i][j] * x[j]; }// 这时候新值只更新完了第i-1个，后面都是旧的
+            x[i] = (b[i] - s + A[i][i]*x[i]) / A[i][i]; // 需要去掉自己
+            updateInfNorm(InfNorm, x[i] - pre);
         }
-
-        iterations++;
-        if (max_diff < epsilon) break;
     }
 }
-
-int GaussSeidelSolver::getIterations() const { return iterations; }

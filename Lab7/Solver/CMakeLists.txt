@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(LAB5 VERSION 1.0)
+project(LAB7 VERSION 1.0)
 
 set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")
 set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
@@ -28,9 +28,9 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 
 file(GLOB_RECURSE SOURCES "src/*.cc" "Main.cc")
 
-add_executable(LAB5 ${SOURCES})
+add_executable(LAB7 ${SOURCES})
 
-target_include_directories(LAB5 PRIVATE
+target_include_directories(LAB7 PRIVATE
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/config
 )
